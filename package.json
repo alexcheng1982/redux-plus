@@ -1,0 +1,56 @@
+{
+  "name": "redux-plus",
+  "version": "0.1.0",
+  "description": "Redux utilities",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexcheng1982/redux-plus.git"
+  },
+  "keywords": [
+    "redux"
+  ],
+  "author": "Fu Cheng <alexcheng1982@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexcheng1982/redux-plus/issues"
+  },
+  "homepage": "https://github.com/alexcheng1982/redux-plus#readme",
+  "devDependencies": {
+    "@types/jest": "^22.0.1",
+    "bluebird": "^3.5.1",
+    "jest": "^22.0.5",
+    "redux-mock-store": "^1.4.0",
+    "ts-jest": "^22.0.1",
+    "ts-loader": "^3.2.0",
+    "typescript": "^2.6.2",
+    "webpack": "^3.10.0"
+  },
+  "dependencies": {
+    "immutable": "^3.8.2",
+    "lodash.assign": "^4.2.0",
+    "lodash.filter": "^4.6.0",
+    "lodash.findindex": "^4.6.0",
+    "lodash.startswith": "^4.2.1",
+    "redux": "^3.7.2"
+  }
+}

@@ -1,2 +1,2 @@
-# redux-plus
+# ReduxPlus
 Redux utilities

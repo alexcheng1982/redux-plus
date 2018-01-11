@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "tslint:recommended"
+  ],
+  "rules": {
+    "quotemark": ["single"],
+    "object-literal-sort-keys": false,
+    "no-console": ["log"]
+  },
+  "rulesDirectory": []
+}
