@@ -2,6 +2,7 @@ import * as Promise from 'bluebird';
 import {AsyncOperationActionHelper} from "./action";
 import {RestActionHelper} from "./rest_action";
 import {createRestActionReducer} from "./reducer";
+import { Map } from "immutable";
 
 const users = [
   {
@@ -23,7 +24,8 @@ describe('reducer', () => {
     const listAction = RestActionHelper.newList('user', null, Promise.resolve(users));
     const successAction = AsyncOperationActionHelper.newSuccess(listAction, users);
     const reducer = createRestActionReducer();
-    let state = reducer([], successAction);
-    expect(state).toHaveLength(3);
+    let state = reducer(Map(), successAction);
+    expect(state.hasIn(['user', 'entities'])).toBe(true);
+    expect(state.getIn(['user', 'entities']).size).toBe(3);
   });
 });

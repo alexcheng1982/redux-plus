@@ -1,5 +1,4 @@
 import * as startsWith from 'lodash.startswith';
-import * as assign from 'lodash.assign';
 
 export interface IAction {
   type: string;
@@ -12,15 +11,19 @@ export interface IAsyncOperationAction<R, T, M> extends IAction {
   metadata?: M;
 }
 
-export interface IAsyncOperationRequestAction<R> extends IAction {
+export interface IAsyncOperationDerivedAction<M> extends IAction {
+  metadata?: M;
+}
+
+export interface IAsyncOperationRequestAction<R, M> extends IAsyncOperationDerivedAction<M> {
   request: R;
 }
 
-export interface IAsyncOperationSuccessAction<T> extends IAction {
+export interface IAsyncOperationSuccessAction<T, M> extends IAsyncOperationDerivedAction<M> {
   data: T;
 }
 
-export interface IAsyncOperationFailureAction extends IAction {
+export interface IAsyncOperationFailureAction<M> extends IAsyncOperationDerivedAction<M> {
   error: Error;
 }
 
@@ -43,23 +46,26 @@ export const AsyncOperationActionHelper = {
       metadata,
     };
   },
-  newRequest: <R, T, M>(action: IAsyncOperationAction<R, T, M>): IAsyncOperationRequestAction<R> => {
-    return assign({}, action.metadata, {
+  newRequest: <R, T, M>(action: IAsyncOperationAction<R, T, M>): IAsyncOperationRequestAction<R, M> => {
+    return {
       type: `${AsyncOperationActionHelper.types.requestPrefix}_${action.name}`,
       request: action.request,
-    });
+      metadata: action.metadata,
+    };
   },
-  newSuccess: <R, T, M>(action: IAsyncOperationAction<R, T, M>, data: T): IAsyncOperationSuccessAction<T> => {
-    return assign({}, action.metadata, {
+  newSuccess: <R, T, M>(action: IAsyncOperationAction<R, T, M>, data: T): IAsyncOperationSuccessAction<T, M> => {
+    return {
       type: `${AsyncOperationActionHelper.types.successPrefix}_${action.name}`,
       data,
-    });
+      metadata: action.metadata,
+    };
   },
-  newFailure: <R, T, M>(action: IAsyncOperationAction<R, T, M>, error: Error): IAsyncOperationFailureAction => {
-    return assign({}, action.metadata, {
+  newFailure: <R, T, M>(action: IAsyncOperationAction<R, T, M>, error: Error): IAsyncOperationFailureAction<M> => {
+    return {
       type: `${AsyncOperationActionHelper.types.failurePrefix}_${action.name}`,
       error,
-    });
+      metadata: action.metadata,
+    };
   },
   isAsync: (action: any): Boolean => {
     return action && action.type === AsyncOperationActionHelper.types.async;
