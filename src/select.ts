@@ -1,8 +1,11 @@
 import {createSelector} from "reselect";
 import * as map from 'lodash.map';
 import { RestActionType } from "./rest_action";
+import { Config } from "./config";
 
-const entityRootSelector = (entity: string) => state => state[entity];
+const storeSelector = state => state[Config.getStoreKey()];
+
+const entityRootSelector = (entity: string) => createSelector(storeSelector, store => store[entity]);
 
 const entitiesSelector = (entity: string) => createSelector(entityRootSelector(entity), root => root.entities);
 
@@ -24,9 +27,8 @@ const errorActionTypeSelector = (entity: string, actionType: RestActionType) =>
     createSelector(errorSelector(entity), error => error[actionType]);
 
 export const Selector = {
-  selectEntities: entitiesSelector,
-  selectEntity: entitySelector,
-  selectList: entitiesListSelector,
-  selectLoading: loadingActionTypeSelector,
-  selectError: errorActionTypeSelector,
+  entitySelector,
+  entitiesListSelector,
+  loadingActionTypeSelector,
+  errorActionTypeSelector,
 };
