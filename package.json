@@ -50,6 +50,7 @@
     "lodash.assign": "^4.2.0",
     "lodash.map": "^4.6.0",
     "lodash.startswith": "^4.2.1",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "reselect": "^3.0.1"
   }
 }

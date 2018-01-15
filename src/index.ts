@@ -19,3 +19,5 @@ export {
 export {asyncOperation} from './middleware';
 
 export {createRestActionReducer} from './reducer';
+
+export {Selector} from './select';
